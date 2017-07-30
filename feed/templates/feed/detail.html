@@ -5,6 +5,16 @@
     <title>Description</title>
 </head>
 <body>
-{{ project }}
+    <h1>Project:  {{ project.name }}</h1>
+    <h3>{{project.description}}</h3>
+    {% if project.module_set.all %}
+        <ul>
+            {% for module in project.module_set.all %}
+                <li>{{module.name}} - {{module.description}} - {{module.publish}}</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <h5>No Modules found. Please add some modules to this Project</h5>
+    {% endif %}
 </body>
 </html>

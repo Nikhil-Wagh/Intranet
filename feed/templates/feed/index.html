@@ -9,7 +9,7 @@
 {% if all_projects %}
     <ul>
         {% for project in all_projects %}
-        <li><a href="/feed/{{ project.id }}/" >{{ project.name }}</a> </li>
+            <li><a href="{% url 'detail' project.id %}" >{{ project.name }}</a> </li>
         {% endfor %}
     </ul>
 {% else %}
