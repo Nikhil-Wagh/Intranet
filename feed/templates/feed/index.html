@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Intranet</title>
+</head>
+<body>
+<h1>Projects</h1>
+{% if all_projects %}
+    <ul>
+        {% for project in all_projects %}
+        <li><a href="/feed/{{ project.id }}/" >{{ project.name }}</a> </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <h3>Please add some projects to display</h3>
+{% endif %}
+</body>
+</html>
