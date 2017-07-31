@@ -2,18 +2,41 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <title>Intranet</title>
 </head>
-<body>
-<h1>Projects</h1>
-{% if all_projects %}
-    <ul>
-        {% for project in all_projects %}
-            <li><a href="{% url 'detail' project.id %}" >{{ project.name }}</a> </li>
-        {% endfor %}
-    </ul>
-{% else %}
-    <h3>Please add some projects to display</h3>
-{% endif %}
+<body onload="update_module_section(1)">
+<script>
+    function update_module_section(pk){
+      //  alert(pk);
+        $.ajax({
+            url: '/feed/'+pk,
+            success : function(data){
+                $('#module_section').html(data);
+            }
+        });
+    }
+</script>
+<div class="row">
+    <div class="col-sm-3">
+        <h1>Projects</h1>
+        {% if all_projects %}
+            <ul>
+                {% for project in all_projects %}
+                    <li>{{project.name}}</li>
+                    <button onclick="update_module_section({{project.id}})">Show Details</button>
+                {% endfor %}
+            </ul>
+        {% else %}
+        <h3>Please add some projects to display</h3>
+        {% endif %}
+    </div>
+    <div class="col-sm-7" style="background-color:blue"></div>
+    <div class="col-sm-2" style="background-color:red">Chat Area</div>
+</div>
+<div class="col-sm-3" id = "module_section" ></div>
 </body>
 </html>

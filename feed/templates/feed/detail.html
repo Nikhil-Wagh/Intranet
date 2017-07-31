@@ -11,6 +11,7 @@
         <ul>
             {% for module in project.module_set.all %}
                 <li>{{module.name}} - {{module.description}} - {{module.publish}}</li>
+                <button onclick="update_commits_section({{module.id}})">Show Details</button>
             {% endfor %}
         </ul>
     {% else %}
