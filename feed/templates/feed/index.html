@@ -21,22 +21,30 @@
     }
 </script>
 <div class="row">
-    <div class="col-sm-3">
-        <h1>Projects</h1>
-        {% if all_projects %}
-            <ul>
-                {% for project in all_projects %}
-                    <li>{{project.name}}</li>
-                    <button onclick="update_module_section({{project.id}})">Show Details</button>
-                {% endfor %}
-            </ul>
-        {% else %}
-        <h3>Please add some projects to display</h3>
-        {% endif %}
+
+    <div class="col-sm-3" style="background-color:#66ff66;height:100vh;">
+        <div class="row">
+            <div class="col-sm-12">
+                <h1>Projects</h1>
+                {% if all_projects %}
+                    <ul>
+                        {% for project in all_projects %}
+                            <li>{{project.name}}</li>
+                            <button onclick="update_module_section({{project.id}})">Show Details</button>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                <h3>Please add some projects to display</h3>
+                {% endif %}
+            </div>
+        </div>
+       <div class="row">
+            <div class="col-sm-12" id = "module_section" ></div>
+       </div>
     </div>
-    <div class="col-sm-7" style="background-color:blue"></div>
-    <div class="col-sm-2" style="background-color:red">Chat Area</div>
+    <div class="col-sm-7" style="background-color:#66a3ff;height:100vh;"></div>
+    <div class="col-sm-2" style="background-color:#ff6666;height:100vh;">Chat Area</div>
 </div>
-<div class="col-sm-3" id = "module_section" ></div>
+
 </body>
 </html>
