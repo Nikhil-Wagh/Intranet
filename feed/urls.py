@@ -10,5 +10,8 @@ urlpatterns = [
 
     # /feed/34<project_id>
     url(r'^(?P<project_id>[0-9]+)/$', views.detail, name='detail'),
+
+    # /feed/<project_id>/<module_id>
+    url(r'^([0-9]+)/(?P<module_id>[0-9]+)/$', views.commit_detail, name = 'commit_detail')
     
 ]

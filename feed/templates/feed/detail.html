@@ -1,21 +1,26 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Description</title>
-</head>
-<body>
-    <h1>Project:  {{ project.name }}</h1>
-    <h3>{{project.description}}</h3>
-    {% if project.module_set.all %}
-        <ul>
-            {% for module in project.module_set.all %}
-                <li>{{module.name}} - {{module.description}} - {{module.publish}}</li>
-                <button onclick="update_commits_section({{module.id}})">Show Details</button>
-            {% endfor %}
-        </ul>
-    {% else %}
-        <h5>No Modules found. Please add some modules to this Project</h5>
-    {% endif %}
-</body>
-</html>
+<script>
+    alert("Project id :"+ {{project.id}});
+    function update_commits_section( project_id, module_id){
+
+         $.ajax({
+            url : '/feed/' + project_id + '/' + module_id +'/'
+            success: function(data){
+                $('#commits_section').html(data);
+            }
+        });
+    }
+</script>
+
+<h1>Project:  {{ project.name }}</h1>
+<h3>{{project.description}}</h3>
+{% if project.module_set.all %}
+    <ul>
+        {% for module in project.module_set.all %}
+            <li>{{module.name}} - {{module.description}} - {{module.publish}}</li>
+            <button onclick="update_commits_section({{project.id}},{{module.id}})">Show Details</button>
+        {% endfor %}
+    </ul>
+{% else %}
+    <h5>No Modules found. Please add some modules to this Project</h5>
+{% endif %}
+<div class="container" id="commits_section">Default Comment</div>

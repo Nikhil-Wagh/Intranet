@@ -1,0 +1,18 @@
+<h1>Module: {{module.name}}</h1>
+<h3>{{module.description}}</h3>
+
+{% if module.commit_set.all %}
+    <ul>
+        {% for commit in module.commit_set.all %}
+            <li>
+                <h4>User Name: {{commit.user_id}}</h4>
+                <h3>{{commit.name}}</h3>
+                <p>{{commit.description}}</p>
+                <strong>{{commit.publish}}</strong>
+            </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <h5>No commits yet.</h5>
+{% endif %}
+
