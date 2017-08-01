@@ -3,6 +3,7 @@ Internal operations management for organisation's workflow.
 ## Tue, Aug 1
 * Updated Templates and View
 * Index file now shows the modules related to the project on click using ajax.
+* Created a commit section.
 
 ## Sun, Jul 30
 * Created a Feed app that will be the home page of the Intranet.
