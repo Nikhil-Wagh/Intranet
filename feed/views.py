@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 
 from django.shortcuts import render, get_object_or_404
 
-from .models import Project, Module
+from .models import Project, Module, Commit
 
 # from django.template import loader
 
@@ -24,6 +24,11 @@ def detail(request, project_id):
 
 def commit_detail(request, module_id):
     module = get_object_or_404(Module, pk=module_id)
-    return render(request, 'feed/commit_detail.html', {'module': module})
+    all_commits = Commit.objects.filter(module_id = module_id)
+    context = {
+        'all_commits': all_commits,
+        'module' : module,
+    }
+    return render(request, 'feed/commit_detail.html', context)
 
 
