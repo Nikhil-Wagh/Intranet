@@ -11,11 +11,11 @@
     <title>Intranet</title>
 </head>
 <script>
-    function update_commits_section( project_id, module_id){
+    function update_comments_section(project_id, module_id, commit_id){
          $.ajax({
-            url : '/feed/' + project_id + '/' + module_id,
+            url : '/feed/' + project_id + '/' + module_id + '/' + commit_id,
             success : function(data){
-                $('#commits_section').html(data);
+                $('#comments_section'+commit_id).html(data);
             }
         });
     }
@@ -23,12 +23,12 @@
 {% if module.commit_set.all %}
     <ul>
         {% for commit in module.commit_set.all %}
-            <li>
+            <li onload="update_comments_section({{project_id}},{{module_id}},{{forloop.counter}})">
                 <h4>User Name: {{commit.user_id}}</h4>
                 <h3>{{commit.name}}</h3>
                 <p>{{commit.description}}</p>
                 <strong>{{commit.publish}}</strong>
-                <div class="container" id="comments_section+{{forloop.counter}}"></div>
+                <div class="container" id = "comments_section{{forloop.counter}}"></div>
             </li>
         {% endfor %}
     </ul>

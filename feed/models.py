@@ -41,7 +41,7 @@ class Commit(models.Model):
     name = models.CharField(max_length=500,default="commit0")
     description = models.CharField(max_length=1000)
     publish = models.DateTimeField()
-    file = models.CharField(max_length=1000,null=True)
+    file = models.CharField(max_length=1000,null=True, blank=True)
     def __str__(self):
         return self.name + ' - ' + self.description
 
