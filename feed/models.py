@@ -18,6 +18,7 @@ class Project(models.Model):
         return self.name + ' - ' + self.description
 
 
+
 #Module Table -- Contains info of all the modules from all the projects, and can be grouped into
 #a particular project using the project id
 
@@ -54,9 +55,9 @@ class Comment(models.Model):
     user_id = models.IntegerField()
     description = models.CharField(max_length=1000)
     publish = models.DateTimeField()
-    file = models.CharField(max_length=1000,null=True)
+    file = models.CharField(max_length=1000,null=True, blank=True)
     def __str__(self):
-        return self.user_id + ' - ' + self.commit_id + ' - ' + self.description
+        return ('User: '+str(self.user_id) + ' - ' + str(self.commit_id) + ' - ' + str(self.description))
 
 
 #Log Table -- It will contain the log entry of every individual working in the organisation.

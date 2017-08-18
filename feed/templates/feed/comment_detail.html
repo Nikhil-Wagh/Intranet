@@ -13,7 +13,7 @@
     <ul>
     {% for comment in all_comments %}
         <li>
-            <h2>{{comment.user_id}}</h2>
+            <h2>User ID:{{comment.user_id}}</h2>
             <p>{{comment.description}}</p>
             <p>{{comment.publish}}</p>
             {% if comment.file %}
