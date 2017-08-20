@@ -1,10 +1,18 @@
 # Intranet
 Internal operations management for organisation's workflow.
 
+## Aug 19, 20
+* Projects, Modules and Commits can be added now.
+* Modal added to do the same
+* Forms Created to enter the data into the database
+* Data retrieval bugs removed
+* Bugs in Comment(not able to eradicate)
+* Changed Model to accomodate file instead of file location.
+* Files can be uploaded and will be stored in the static folder
+
 ## Fri, Aug 18
 * Updated Templates and View
 * Comments are now visible onclick of the button(for now)
-
 
 ## Tue, Aug 1
 * Updated Templates and View
