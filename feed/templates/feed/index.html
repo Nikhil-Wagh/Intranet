@@ -1,17 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <title>Intranet</title>
-</head>
+{% include 'feed/header.html' %}
 <body onload="update_module_section(1)">
 <script>
     function update_module_section(project_id){
-      //  alert(pk);
         $.ajax({
             url: '/feed/'+project_id,
             success : function(data){
@@ -20,27 +10,29 @@
         });
     }
 </script>
+<script type="text/javascript">
+    $(function() {
+        $.fm({debug: true});
+    });
+</script>
 <div class="row">
-    <div class="col-sm-3" style="background-color:#66ff66;height:100vh;">
-        <div class="row">
-            <div class="col-sm-12">
-                <h1>Projects</h1>
-                {% if all_projects %}
-                    <ul>
-                        {% for project in all_projects %}
-                            <li>{{project.name}}</li>
-                            <button onclick="update_module_section({{project.id}})">Show Details</button>
-                        {% endfor %}
-                    </ul>
-                {% else %}
-                <h3>Please add some projects to display</h3>
-                {% endif %}
-            </div>
-        </div>
-       <div class="row">
-            <div class="col-sm-12" id = "module_section" ></div>
-       </div>
+    <div class="col-sm-3" id = "project_section" style="background-color:#66ff66;height:100vh;">
+        <h1>Projects</h1>
+        {% if all_projects %}
+            <ul>
+                {% for project in all_projects %}
+                    <li>{{project.name}}</li>
+                    <button onclick="update_module_section({{project.id}})">Show Details</button>
+                {% endfor %}
+            </ul>
+        {% else %}
+        <h3>Please add some projects to display</h3>
+        {% endif %}
+          <!--<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Add Project</button>-->
+        {% include 'feed/form.html' %}
+        <div  id = "module_section" ></div>
     </div>
+
     <div class="col-sm-7" id="commits_section" style="background-color:#66a3ff;height:100vh;"></div>
     <div class="col-sm-2" style="background-color:#ff6666;height:100vh;">Chat Area</div>
 </div>
@@ -50,7 +42,3 @@
 
 
 
-
-<!--Comments-->
-<!-- if a project is selected and the user refreshes the page the default selected project appears
- that should not happen project selected earlier should stay selected.-->

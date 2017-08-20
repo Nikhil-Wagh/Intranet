@@ -1,13 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <title>Intranet</title>
-</head>
+{% include 'feed/header.html' %}
 <script>
     function update_commits_section( project_id, module_id){
          $.ajax({
@@ -31,3 +22,5 @@
 {% else %}
     <h5>No Modules found. Please add some modules to this Project</h5>
 {% endif %}
+<!--<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Add Module</button>-->
+{% include 'feed/form.html' %}

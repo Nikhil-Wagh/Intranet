@@ -1,5 +1,11 @@
 # Intranet
 Internal operations management for organisation's workflow.
+
+## Fri, Aug 18
+* Updated Templates and View
+* Comments are now visible onclick of the button(for now)
+
+
 ## Tue, Aug 1
 * Updated Templates and View
 * Index file now shows the modules related to the project on click using ajax.
