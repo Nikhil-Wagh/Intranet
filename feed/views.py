@@ -18,21 +18,21 @@ app_name = 'feed'
 def index(request):
     all_projects = Project.objects.all()
     if request.method == 'POST':
-        form = ProjectForm(request.POST)
-        if form.is_valid():
+        project_form = ProjectForm(request.POST, prefix="project")
+        if project_form.is_valid():
             new_project = Project()
-            new_project.name = form.cleaned_data['name']
-            new_project.manager_id = form.cleaned_data['manager_id']
-            new_project.description = form.cleaned_data['description']
+            new_project.name = project_form.cleaned_data['name']
+            new_project.manager_id = project_form.cleaned_data['manager_id']
+            new_project.description = project_form.cleaned_data['description']
             new_project.publish = timezone.now()
             new_project.save()
             return HttpResponseRedirect('/feed')
 
     else:
-        form = ProjectForm()
+        project_form = ProjectForm(prefix='project')
 
     context = {'all_projects': all_projects,
-               'form': form,
+               'project_form': project_form,
                'form_head': "Project",
                }
     return render(request, 'feed/index.html', context)
@@ -41,20 +41,20 @@ def index(request):
 def detail(request, project_id):
     project = get_object_or_404(Project, pk=project_id)
     if request.method == 'POST':
-        form = ModuleForm(request.POST)
-        if form.is_valid():
+        module_form = ModuleForm(request.POST, prefix="module")
+        if module_form.is_valid():
             new_module = Module()
             new_module.project_id = Project.objects.filter(id=project_id)[0]
-            new_module.name = form.cleaned_data['name']
-            new_module.description = form.cleaned_data['description']
+            new_module.name = module_form.cleaned_data['name']
+            new_module.description = module_form.cleaned_data['description']
             new_module.publish = timezone.now()
             new_module.save()
             return HttpResponseRedirect('/feed')
 
     else:
-        form = ModuleForm
+        module_form = ModuleForm(prefix="module")
 
-    return render(request, 'feed/detail.html', {'form': form,
+    return render(request, 'feed/detail.html', {'module_form': module_form,
                                                 'form_head': "Module",
                                                 'project':project,
                                               })
@@ -82,25 +82,25 @@ def comment_detail(request, commit_id):
     return render(request, 'feed/comment_detail.html', context)
 
 
-def add_module(request, project_id):
-    if request.method == 'POST':
-        form = ModuleForm(request.POST)
-        if form.is_valid():
-            new_module = Module()
-            new_module.project_id = Project.objects.filter(id=project_id)[0]
-            new_module.name = form.cleaned_data['name']
-            new_module.description = form.cleaned_data['description']
-            new_module.publish = timezone.now()
-            new_module.save()
-            return HttpResponseRedirect('/feed')
-
-    else:
-        form = ModuleForm
-
-    return render(request, 'feed/form.html', {'form': form,
-                                              'form_head': "Module",
-                                              })
-
+# def add_module(request, project_id):
+#     if request.method == 'POST':
+#         form = ModuleForm(request.POST)
+#         if form.is_valid():
+#             new_module = Module()
+#             new_module.project_id = Project.objects.filter(id=project_id)[0]
+#             new_module.name = form.cleaned_data['name']
+#             new_module.description = form.cleaned_data['description']
+#             new_module.publish = timezone.now()
+#             new_module.save()
+#             return HttpResponseRedirect('/feed')
+#
+#     else:
+#         form = ModuleForm
+#
+#     return render(request, 'feed/form.html', {'form': form,
+#                                               'form_head': "Module",
+#                                               })
+#
 
 def add_commit(request, module_id):
     if request.method == 'POST':

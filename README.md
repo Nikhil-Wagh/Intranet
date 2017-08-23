@@ -7,7 +7,7 @@ Internal operations management for organisation's workflow.
 * Forms Created to enter the data into the database
 * Data retrieval bugs removed
 * Bugs in Comment(not able to eradicate)
-* Changed Model to accomodate file instead of file location.
+* Changed Model to accommodate file instead of file location.
 * Files can be uploaded and will be stored in the static folder
 
 ## Fri, Aug 18
