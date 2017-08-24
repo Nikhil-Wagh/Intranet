@@ -1,6 +1,27 @@
 {% include 'feed/header.html' %}
 <body onload="update_module_section(1)">
-<script>
+
+<nav class="navbar navbar-inverse" style="border-radius: 0">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#"><span class="glyphicon glyphicon-globe"></span> Intranet</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#"><span class="glyphicon glyphicon-user"></span> Account</a></li>
+        <li><a href="#"><span class="glyphicon glyphicon-off"></span> Logout</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="container-fluid" style="height: auto; width: auto">
+    <script>
     function update_module_section(project_id){
         $.ajax({
             url: '/feed/'+project_id,
@@ -9,61 +30,62 @@
             }
         });
     }
-</script>
-<script type="text/javascript">
-    $(function() {
-        $.fm({debug: true});
-    });
-</script>
-<div class="row">
-    <div class="col-sm-3" id = "project_section" style="background-color:#66ff66;height:100vh;">
-        <h1>Projects</h1>
-        {% if all_projects %}
-            <ul>
-                {% for project in all_projects %}
-                    <li>{{project.name}}</li>
-                    <button onclick="update_module_section({{project.id}})">Show Details</button>
-                {% endfor %}
-            </ul>
-        {% else %}
-        <h3>Please add some projects to display</h3>
-        {% endif %}
-          <!--<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Add Project</button>-->
-        <div class="container">
-            <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#ProjectModal">Add {{form_head}}</button>
-            <!-- Modal -->
-            <div class="modal fade" id="ProjectModal" role="dialog">
-                <div class="modal-dialog">
+    </script>
+    <script type="text/javascript">
+    </script>
+    <div class="full">
+        <div class="row">
+            <div class="col-sm-3 " id = "project_section" style="background-color:#44a8ff;height:92vh;">
+                <h4>Projects &nbsp <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#ProjectModal">Add {{form_head}}</button></h4>
+                <div style="height: 33vh; overflow-x: hidden; overflow-y: scroll;">
+                    {% if all_projects %}
+                    <ul>
+                        {% for project in all_projects %}
+                            <li>{{project.name}}</li>
+                            <button onclick="update_module_section({{project.id}})">Show Details</button>
+                        {% endfor %}
+                    </ul>
+                    {% else %}
+                    <h6>Please add some projects to display</h6>
+                    {% endif %}
+                </div>
 
-                    <!-- Modal content-->
-                    <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">Add {{form_head}}</h4>
+                <!-- Modal -->
+
+                    <div class="modal fade" id="ProjectModal" role="dialog">
+                        <!--<div class="modal-dialog">-->
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    <h4 class="modal-title">Add {{form_head}}</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <form action="" method="post" enctype="multipart/form-data">
+                                        {% csrf_token %}
+                                        <table>
+                                            {{ project_form.as_table }}
+                                        </table>
+                                        <button class="btn waves-effect waves-light" type="submit" name="action">Submit<i class="material-icons right">send</i></button>
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    </form>
+
+                                </div>
+                            </div>
+                        <!--</div>-->
                     </div>
-                    <div class="modal-body">
-                        <form action="" method="post" enctype="multipart/form-data">
-                            {% csrf_token %}
-                            <table>
-                                {{ project_form.as_table }}
-                            </table>
-                            <input type="submit" value = "Submit">
-                        </form>
-                    </div>
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    </div>
+
+
+                <div style="height: auto;" id = "module_section" ></div>
+                <div>
 
                 </div>
             </div>
-
+            <div class="col-sm-7" id="commits_section" style="background-color:#ffffff;height:92vh; overflow-x: hidden; overflow-y: scroll;"></div>
+            <div class="col-sm-2" style="background-color:#ff6666;height:92vh; overflow-x: hidden; overflow-y: scroll;">Chat Area</div>
         </div>
-        <div  id = "module_section" ></div>
     </div>
-
-    <div class="col-sm-7" id="commits_section" style="background-color:#66a3ff;height:100vh;"></div>
-    <div class="col-sm-2" style="background-color:#ff6666;height:100vh;">Chat Area</div>
 </div>
-
 </body>
 </html>
 

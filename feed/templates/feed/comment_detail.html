@@ -1,19 +1,27 @@
 {% include 'feed/header.html' %}
 <body>
 {% if all_comments %}
-    <ul>
     {% for comment in all_comments %}
-        <li>
-            <h2>User ID:{{comment.user_id}}</h2>
-            <p>{{comment.description}}</p>
-            <p>{{comment.publish}}</p>
-            {% if comment.file %}
-                <a href="{{comment.file}}">File</a>
-            {% endif %}
-        </li>
+        <div class="w3-container"style="margin-bottom: 20px;margin-left:-25px; width: 65%;">
+            <div class="w3-card">
+                <div class="w3-container"style="padding: 10px;">
+                    <p>{{comment.description}}</p>
+                    <!--<p>Here:{{project_id}},{{module.id}},{{forloop.counter}}</p>-->
+                    {% if comment.file %}
+                    <span class="pull-right"> <a  href="{{comment.file}}">File</a></span>
+                    {% endif %}
+                    <p class="pull-right">User ID:{{comment.user_id}}</p>
+                </div>
+
+                <footer class="w3-container w3-gray">
+                <span class="pull-right">{{comment.publish}}</span>
+                </footer>
+            </div>
+        </div>
     {% endfor %}
-    </ul>
 {% else %}
     <h3>No Comments to show</h3>
 {% endif %}
 </body>
+
+

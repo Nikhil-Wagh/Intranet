@@ -1,15 +1,6 @@
-<h1>Module: {{module.name}}</h1>
-<h3>{{module.description}}</h3>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <title>Intranet</title>
-</head>
+{% include "feed/header.html" %}
+<h4>Module: {{module.name}}</h4>
+<h5>{{module.description}}</h5>
 <script>
     document.getElementById()
     function update_comments(project_id, module_id, commit_id){
@@ -22,20 +13,55 @@
     }
 </script>
 {% if module.commit_set.all %}
-    <ul>
-        {% for commit in module.commit_set.all %}
-            <li>
-                <h4>User ID: {{commit.user_id}}</h4>
-                <h3>{{commit.name}}</h3>
-                <p>{{commit.description}}</p>
+    {% for commit in module.commit_set.all %}
+        <div class="w3-container"style="margin-bottom: 20px;margin-left: -10px;">
+            <div class="w3-card-4">
+                <header class="w3-container w3-green">
+                <h4>{{commit.name}}</h4>
+                <h5 class="pull-right">User ID: {{commit.user_id}}</h5>
+                </header>
+
+                <div class="w3-container"style="padding: 10px;">
+                    <p>{{commit.description}}</p>
+                    <!--<p>Here:{{project_id}},{{module.id}},{{forloop.counter}}</p>-->
+                    <div class="container" id = "comments_section{{forloop.counter}}">Division it is</div>
+                    <button onclick="update_comments({{project_id}},{{module.id}},{{forloop.counter}})">Show Comments</button>
+                </div>
+
+                <footer class="w3-container w3-gray">
                 <strong>{{commit.publish}}</strong>
-                <!--<p>Here:{{project_id}},{{module.id}},{{forloop.counter}}</p>-->
-                <div class="container" id = "comments_section{{forloop.counter}}">Division it is</div>
-                <button onclick="update_comments({{project_id}},{{module.id}},{{forloop.counter}})">Show Comments</button>
-            </li>
-        {% endfor %}
-    </ul>
+                </footer>
+            </div>
+        </div>
+    {% endfor %}
 {% else %}
     <h5>No commits yet.</h5>
 {% endif %}
+<div class="container">
+    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#CommitModal">Add Commit</button>
+    <!-- Modal -->
+    <div class="modal fade" id="CommitModal" role="dialog">
+        <!--<div class="modal-dialog">-->
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Add Commit</h4>
+                </div>
+                <div class="modal-body">
+                    <form action="{% url 'feed:commit_detail' project_id module.id  %}" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <table>
+                            {{ commit_form.as_table }}
+                        </table>
+                        <button class="btn waves-effect waves-light" type="submit" name="action">Submit<i class="material-icons right">send</i></button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </form>
+                </div>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        <!--</div>-->
+    </div>
+</div>
+
 

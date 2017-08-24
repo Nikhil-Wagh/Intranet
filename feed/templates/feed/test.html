@@ -1,0 +1,23 @@
+{% include "feed/header.html" %}
+<a class="waves-effect waves-light btn modal-trigger" onclick="openModal()" href="#modal1">Modal</a>
+
+  <!-- Modal Structure -->
+  <div id="modal1" class="modal">
+    <div class="modal-content">
+      <h4>Modal Header</h4>
+      <p>A bunch of text</p>
+    </div>
+    <div class="modal-footer">
+      <a href="" onclick="closeModal()" class="modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+    </div>
+  </div>
+
+<script>
+   function openModal(){
+      $('.modal').modal();
+   }
+   function closeModal(){
+       $('#modal1').modal('close');
+   }
+</script>
+

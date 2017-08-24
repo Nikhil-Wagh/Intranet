@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 from __future__ import unicode_literals
 
 from django.http import HttpResponseRedirect
@@ -9,9 +8,6 @@ from django.utils import timezone
 from .forms import ProjectForm, ModuleForm, CommitForm
 from .models import Project, Module, Commit, Comment
 
-# from django.template import loader
-
-# Create your views here.
 app_name = 'feed'
 
 
@@ -43,13 +39,18 @@ def detail(request, project_id):
     if request.method == 'POST':
         module_form = ModuleForm(request.POST, prefix="module")
         if module_form.is_valid():
-            new_module = Module()
-            new_module.project_id = Project.objects.filter(id=project_id)[0]
-            new_module.name = module_form.cleaned_data['name']
-            new_module.description = module_form.cleaned_data['description']
-            new_module.publish = timezone.now()
-            new_module.save()
-            return HttpResponseRedirect('/feed')
+            try:
+                new_module = Module()
+                new_module.project_id = Project.objects.filter(id=project_id)[0]
+                new_module.name = module_form.cleaned_data['name']
+                new_module.description = module_form.cleaned_data['description']
+                new_module.publish = timezone.now()
+                new_module.save()
+            except Exception as e:
+                print(e)
+            else:
+                # print("New Module added", new_module.name, new_module.description)
+                return HttpResponseRedirect('/feed')
 
     else:
         module_form = ModuleForm(prefix="module")
@@ -61,14 +62,30 @@ def detail(request, project_id):
 
 
 def commit_detail(request, module_id):
-    module = get_object_or_404(Module, pk=module_id)
-    p = Project.objects.filter(module=module)
+    mod = get_object_or_404(Module, pk=module_id)
+    p = Project.objects.filter(module=mod)
     project_id = p[0].id
     all_commits = Commit.objects.filter(module_id=module_id)
+    if request.method == 'POST':
+        commit_form = CommitForm(request.POST, request.FILES, prefix="commit")
+        if commit_form.is_valid():
+            new_commit = Commit()
+            new_commit.module_id = Module.objects.filter(id=module_id)[0]
+            new_commit.name = commit_form.cleaned_data['name']
+            new_commit.user_id = commit_form.cleaned_data['user_id']
+            new_commit.description = commit_form.cleaned_data['description']
+            new_commit.file = request.FILES['file']
+            new_commit.publish = timezone.now()
+            new_commit.save()
+            return HttpResponseRedirect('/feed')
+
+    else:
+        commit_form = CommitForm
     context = {
         'all_commits': all_commits,
-        'module': module,
+        'module': mod,
         'project_id': project_id,
+        'commit_form':commit_form,
     }
     return render(request, 'feed/commit_detail.html', context)
 
@@ -82,64 +99,5 @@ def comment_detail(request, commit_id):
     return render(request, 'feed/comment_detail.html', context)
 
 
-# def add_module(request, project_id):
-#     if request.method == 'POST':
-#         form = ModuleForm(request.POST)
-#         if form.is_valid():
-#             new_module = Module()
-#             new_module.project_id = Project.objects.filter(id=project_id)[0]
-#             new_module.name = form.cleaned_data['name']
-#             new_module.description = form.cleaned_data['description']
-#             new_module.publish = timezone.now()
-#             new_module.save()
-#             return HttpResponseRedirect('/feed')
-#
-#     else:
-#         form = ModuleForm
-#
-#     return render(request, 'feed/form.html', {'form': form,
-#                                               'form_head': "Module",
-#                                               })
-#
-
-def add_commit(request, module_id):
-    if request.method == 'POST':
-        form = CommitForm(request.POST, request.FILES)
-        if form.is_valid():
-            new_commit = Commit()
-            new_commit.module_id = Module.objects.filter(id=module_id)[0]
-            new_commit.name = form.cleaned_data['name']
-            new_commit.user_id = form.cleaned_data['user_id']
-            new_commit.description = form.cleaned_data['description']
-            new_commit.file = request.FILES['file']
-            new_commit.publish = timezone.now()
-            new_commit.save()
-            return HttpResponseRedirect('/feed')
-
-    else:
-        form = CommitForm
-
-    return render(request, 'feed/form.html', {'form': form,
-                                              'form_head': "Commit",
-                                              })
-
-
-
-# class FeedbackCreateView(AjaxCreateView):
-#     form_class = FeedbackForm
-
-
-
-# def ProjectUpdateView(request, UpdateView):
-#     model = Project
-#     form_class = ItemForm
-#     template_name = 'feed/project_edit_form.html'
-#
-#     def dispatch(self, *args, *kwargs):
-#         self.project_id = kwargs['pk']
-#         return super(ProjectUpdateView, self).dispatch(*args, *kwargs)
-#
-#     def form_valid(self, form):
-#         form.save()
-#         project = Project.objects.get(id=self.project_id)
-#         return render(request, 'feed/project_edit_form_success.html', {'project': project})
+def test(request):
+    return render(request, 'feed/test.html')
