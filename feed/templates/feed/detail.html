@@ -14,20 +14,24 @@
         <!--alert({{ test_word }});-->
     <!--}-->
 <!--</script>-->
-<h4>Modules &nbsp <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#ModuleModal">Add Module</button></h4>
+<h4>Modules &nbsp <button type="button" class="btn btn-info btn-lg pull-right" data-toggle="modal" data-target="#ModuleModal">Add</button></h4>
 <h5>Project:  {{ project.name }}</h5>
-<h6>{{project.description}}</h6>
 <div style="height: 30vh;overflow-x: hidden; overflow-y: scroll;">
+
+
+
     {% if project.module_set.all %}
-    <ul>
         {% for module in project.module_set.all %}
-            <li>{{module.name}} - {{module.description}} - {{module.publish}}</li>
-            <button onclick="update_commits_section({{project.id}},{{module.id}})">Show Details</button>
+            {% include 'feed/cards/card_module.html' with module=module %}
         {% endfor %}
-    </ul>
     {% else %}
         <h5>No Modules found. Please add some modules to this Project</h5>
     {% endif %}
+
+
+
+
+
     <div class="container">
         <!--<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#ModuleModal">Add {{form_head}}</button>-->
         <!-- Modal -->

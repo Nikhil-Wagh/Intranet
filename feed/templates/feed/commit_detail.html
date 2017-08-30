@@ -1,5 +1,5 @@
 {% include "feed/header.html" %}
-<h4>Module: {{module.name}}</h4>
+<h4>Module: {{module.name}}<button type="button" class="btn btn-info btn-lg pull-right" data-toggle="modal" data-target="#CommitModal">Add Commit</button></h4>
 <h5>{{module.description}}</h5>
 <script>
     document.getElementById()
@@ -14,31 +14,14 @@
 </script>
 {% if module.commit_set.all %}
     {% for commit in module.commit_set.all %}
-        <div class="w3-container"style="margin-bottom: 20px;margin-left: -10px;">
-            <div class="w3-card-4">
-                <header class="w3-container w3-green">
-                <h4>{{commit.name}}</h4>
-                <h5 class="pull-right">User ID: {{commit.user_id}}</h5>
-                </header>
-
-                <div class="w3-container"style="padding: 10px;">
-                    <p>{{commit.description}}</p>
-                    <!--<p>Here:{{project_id}},{{module.id}},{{forloop.counter}}</p>-->
-                    <div class="container" id = "comments_section{{forloop.counter}}">Division it is</div>
-                    <button onclick="update_comments({{project_id}},{{module.id}},{{forloop.counter}})">Show Comments</button>
-                </div>
-
-                <footer class="w3-container w3-gray">
-                <strong>{{commit.publish}}</strong>
-                </footer>
-            </div>
-        </div>
+        {% include 'feed/cards/card_commit.html' with commit=commit %}
     {% endfor %}
 {% else %}
     <h5>No commits yet.</h5>
 {% endif %}
+
+
 <div class="container">
-    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#CommitModal">Add Commit</button>
     <!-- Modal -->
     <div class="modal fade" id="CommitModal" role="dialog">
         <!--<div class="modal-dialog">-->
