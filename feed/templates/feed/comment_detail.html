@@ -2,26 +2,12 @@
 <body>
 {% if all_comments %}
     {% for comment in all_comments %}
-        <div class="w3-container"style="margin-bottom: 20px;margin-left:-25px; width: 65%;">
-            <div class="w3-card">
-                <div class="w3-container"style="padding: 10px;">
-                    <p>{{comment.description}}</p>
-                    <!--<p>Here:{{project_id}},{{module.id}},{{forloop.counter}}</p>-->
-                    {% if comment.file %}
-                    <span class="pull-right"> <a  href="{{comment.file}}">File</a></span>
-                    {% endif %}
-                    <p class="pull-right">User ID:{{comment.user_id}}</p>
-                </div>
-
-                <footer class="w3-container w3-gray">
-                <span class="pull-right">{{comment.publish}}</span>
-                </footer>
-            </div>
+        <div class="card-panel blue-grey lighten-4 text-darken-2">
+            <p><span class="blue-text">{{comment.user_id}}: &nbsp;</span>{{comment.description}}<span class="pull-right">{{comment.publish}}</span></p>
+            {% if comment.file %}
+                <span> <a  href="{{comment.file}}">File</a></span>
+            {% endif %}
         </div>
     {% endfor %}
-{% else %}
-    <h3>No Comments to show</h3>
 {% endif %}
 </body>
-
-

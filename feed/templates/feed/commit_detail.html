@@ -4,6 +4,7 @@
 <script>
     document.getElementById()
     function update_comments(project_id, module_id, commit_id){
+        document.getElementById('btn_see_comments_' + commit_id).style.display = 'none';
         $.ajax({
             url : '/feed/' + project_id + '/' + module_id + '/' + commit_id,
             success : function(data){
@@ -41,7 +42,6 @@
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                     </form>
                 </div>
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
         <!--</div>-->
     </div>
