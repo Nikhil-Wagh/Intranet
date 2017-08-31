@@ -74,13 +74,13 @@ def commit_detail(request, module_id):
             new_commit.name = commit_form.cleaned_data['name']
             new_commit.user_id = commit_form.cleaned_data['user_id']
             new_commit.description = commit_form.cleaned_data['description']
-            new_commit.file = request.FILES['file']
+            new_commit.file = request.FILES['commit-file']
             new_commit.publish = timezone.now()
             new_commit.save()
             return HttpResponseRedirect('/feed')
 
     else:
-        commit_form = CommitForm
+        commit_form = CommitForm(prefix="commit")
     context = {
         'all_commits': all_commits,
         'module': mod,

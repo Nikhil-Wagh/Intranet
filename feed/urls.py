@@ -14,12 +14,12 @@ urlpatterns = [
     url(r'^(?P<project_id>[0-9]+)/$', views.detail, name='detail'),
 
     # /feed/<project_id>/<module_id>
-    url(r'^([0-9]+)/(?P<module_id>[0-9]+)/$', views.commit_detail, name = 'commit_detail'),
+    url(r'^([0-9]+)/(?P<module_id>[0-9]+)/$', views.commit_detail, name='commit_detail'),
 
-    url(r'^test/', views.test, name = "test"),
+    url(r'^test/', views.test, name="test"),
     # # /feed/<project_id>/<module_id>/<commit_id>
     # url(r'^([0-9]+)/(?P<module_id>[0-9]+)/add/$', views.add_commit, name='add_commit'),
-    url(r'^([0-9]+)/([0-9]+)/(?P<commit_id>[0-9]+)/$', views.comment_detail, name = 'comment_detail'),
+    url(r'^([0-9]+)/([0-9]+)/(?P<commit_id>[0-9]+)/$', views.comment_detail, name='comment_detail'),
 
     # url(r'^create/$', FeedbackCreateView.as_view(), name="feedback_create"),
 ]

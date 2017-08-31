@@ -2,7 +2,6 @@
 <h4>Module: {{module.name}}<button type="button" class="btn btn-info btn-lg pull-right" data-toggle="modal" data-target="#CommitModal">Add Commit</button></h4>
 <h5>{{module.description}}</h5>
 <script>
-    document.getElementById()
     function update_comments(project_id, module_id, commit_id){
         document.getElementById('btn_see_comments_' + commit_id).style.display = 'none';
         $.ajax({

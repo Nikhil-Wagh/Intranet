@@ -27,10 +27,11 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-CRISPY_TEMPLATE_PACK = 'bootstrap3'
+
 # Application definition
 
 INSTALLED_APPS = [
+    'accounts.apps.AccountsConfig',
     'feed.apps.FeedConfig',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -39,8 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sitemaps',
-    'crispy_forms',
-    'fm',
+
+
 ]
 
 MIDDLEWARE = [
@@ -126,4 +127,10 @@ STATIC_URL = '/static/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+
+
+LOGIN_REDIRECT_URL='/account/'
+EMAIL_HOST = 'localhost'
+EMAIL_PORT = 1025
+LOGIN_URL = '/account/login'
 
