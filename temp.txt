@@ -1,0 +1,5 @@
+ <div>
+            <a href="{% url 'feed:feedback_create' %}" class="fm-create btn btn-primary" data-fm-head="Creating feedback" data-fm-callback="reload">Create new</a>
+            {% block content %}{% endblock %}
+                {% include "fm/modal.html" %}
+        </div>
