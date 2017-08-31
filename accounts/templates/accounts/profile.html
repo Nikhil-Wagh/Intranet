@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+
+    {% block head %}
+    <title>Profile</title>
+        <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    {% endblock %}
+
+    {% block body %}
+    <h1>Profile</h1>
+    <div class="container-fluid" data-file-width="240">
+        <div class="row">
+
+        <p>Username: {{ user }}</p>
+        <p>First name: {{ user.first_name }}</p>
+        <p>Last name: {{ user.last_name }}</p>
+        <p>City :{{user.userprofile.city}}</p>
+        <p>Email : {{ user.email }}</p>
+        <p>usern : {{ user.userprofile.user }}</p>
+        <p>Phone :{{user.userprofile.phone}}</p>
+        <p>Description :{{user.userprofile.description}}</p>
+        <p>Skills :{{user.userprofile.skills}}</p>
+        <p>Website :<a href="{{user.userprofile.website}}">{{user.userprofile.website}}</a></p></p>
+        <p>Emp Rating: {{user.userprofile.emp_rating}}</p>
+
+    </div>
+    </div>
+
+        <a href="{% url 'accounts:register2' %}">Add details</a>
+
+   <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Change Password</button>
+    {% include 'accounts/change_password.html' %}
+
+
+    {% endblock %}
