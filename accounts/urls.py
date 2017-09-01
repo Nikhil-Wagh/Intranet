@@ -6,7 +6,6 @@ from django.contrib.auth.views import (
 )
 
 urlpatterns = [
-                url(r'^$', views.home,name='home'),
 
                 url(r'^login/$', login, { 'template_name':'accounts/login.html' },name='login' ),
 

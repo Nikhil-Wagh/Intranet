@@ -125,7 +125,7 @@ STATIC_URL = '/static/'
 MEDIA_URL='/media/'
 MEDIA_ROOT=os.path.join(BASE_DIR,'media')
 
-LOGIN_REDIRECT_URL='/feed/'
+LOGIN_REDIRECT_URL='/feed'
 EMAIL_HOST = 'localhost'
 EMAIL_PORT = 1025
 LOGIN_URL = '/account/login'
