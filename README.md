@@ -11,7 +11,7 @@ Internal operations management for organisation's workflow.
 * User can alter his details as well as his password.
 * Navbar created and is working now.
 * URL and session handling is done.
-* 
+
 
 ## Aug 19, 20
 * Projects, Modules and Commits can be added now.
