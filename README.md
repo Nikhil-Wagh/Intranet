@@ -1,18 +1,6 @@
 # Intranet
 Internal operations management for organisation's workflow.
 
-## Aug 22 - Sep 02
-* Both Apps are merged together
-* Cards are added in feed app to improve the GUI
-* All forms are working now
-* Files will be stored in media folder, but only one file is allowed per commit.
-* Account app is also working now.
-* User needs to login to Intranet to access the feed app
-* User can alter his details as well as his password.
-* Navbar created and is working now.
-* URL and session handling is done.
-
-
 ## Aug 19, 20
 * Projects, Modules and Commits can be added now.
 * Modal added to do the same
