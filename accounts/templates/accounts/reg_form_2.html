@@ -4,7 +4,7 @@
 {% block head %}
 
 
-    <title>Log in</title>
+    <title>Add Details</title>
  <link rel="stylesheet" media="all" href="https://hrcdn.net/hackerrank/assets/hackerrank-core-706c2914987d18c241bff6e251414ebb.css" />
     <link rel="stylesheet" media="all" href="https://hrcdn.net/hackerrank/assets/external_libraries-507bf28a74260fdc83d8547e5c699aa9.css" />
     <link rel="stylesheet" media="all" href="https://hrcdn.net/hackerrank/assets/auth-43c15f79360339f125f5aa081a6fc6d7.css" />
@@ -35,26 +35,7 @@
           <form class="legacy-form Bizible-Exclude" method="POST">
                {% csrf_token %}
               <div class="homepage_signupgroup--legacy">
-                  <div class="text-center alert error" style="display:none;"></div>
-                  <div class="formgroup">
-                    <h4>Description:</h4><input type="text" name="description" required id="id_description" maxlength="100" class="form-control" placeholder="Description"/>
-                  </div>
-                  <div class="formgroup">
-                    <h4>Address:</h4><input type="text" name="city" required id="id_city" maxlength="20" class="form-control" placeholder="Full address with pin code"/>
-                  </div>
-                  <div class="formgroup">
-                    <h4>Website:</h4><input type="url" name="website" required id="id_website" maxlength="200" class="form-control" placeholder="https://xyz.com"/>
-                  </div>
-                  <div class="formgroup">
-                    <h4>Phone:</h4><input type="number" name="phone" value="0" required id="id_phone" class="form-control" placeholder="Phone"/>
-                  </div>
-                  <div class="formgroup">
-                    <h4>Experience:</h4><input type="number" name="experience" value="0" required id="id_experience" class="form-control" placeholder="Years"/>
-                  </div>
-                  <div class="formgroup">
-                        <h4>Skills:</h4><input type="text" name="skills" required id="id_skills" maxlength="200" class="form-control" placeholder="Technical and Management"/>
-                  </div>
-
+                  {{form.as_p}}
 
 
                   <p class="text-center"><button class="btn btn-primary login-button auth" type="submit">Add Details</button></p>

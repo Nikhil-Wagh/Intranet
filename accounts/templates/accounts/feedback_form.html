@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+<html>
+{% block head %}
+    <title>Log in</title>
+    <link rel="stylesheet" media="all" href="https://hrcdn.net/hackerrank/assets/hackerrank-core-706c2914987d18c241bff6e251414ebb.css" />
+    <link rel="stylesheet" media="all" href="https://hrcdn.net/hackerrank/assets/external_libraries-507bf28a74260fdc83d8547e5c699aa9.css" />
+    <link rel="stylesheet" media="all" href="https://hrcdn.net/hackerrank/assets/auth-43c15f79360339f125f5aa081a6fc6d7.css" />
+    <link rel="stylesheet" id="js-hr-typography" type="text/css" href="https://hrcdn.net/lib/typography/345134/hosts/https/hrcdn.net/7C1B0FD393AD7F74A.css" data-noprefix />
+
+{% endblock %}
+{% block body %}
+<br>
+<br>
+<br>
+<br>
+<br>
+<div class="responsive-form block-center">
+  <div class="login-group homepage_admin light-wrap">
+      <ul class="login_tab unstyled vertical clearfix">
+          <li class="signup-toggle toggle active">Feedback for the day</li>
+
+      </ul>
+
+
+      <div class="login " style="display: block;">
+          <form class="legacy-form Bizible-Exclude" method="POST">
+               {% csrf_token %}
+              <div class="homepage_signupgroup--legacy">
+
+                  <div class="formgroup">
+
+                      <textarea name="feedback" id="id_feedback" rows="6" cols="33" required placeholder="Enter the Session Summary">
+</textarea>
+                  </div>
+
+
+                  <p class="text-center"><button class="btn btn-primary login-button auth" type="submit">Log Out</button></p>
+
+              </div>
+
+
+          </form>
+      </div>
+  </div>
+  </div>
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+

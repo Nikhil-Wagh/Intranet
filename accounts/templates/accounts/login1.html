@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
-<html>
+
 {% block head %}
 
 
-    <title>Log in</title>
+    <title>Invalid Credentials</title>
  <link rel="stylesheet" media="all" href="https://hrcdn.net/hackerrank/assets/hackerrank-core-706c2914987d18c241bff6e251414ebb.css" />
     <link rel="stylesheet" media="all" href="https://hrcdn.net/hackerrank/assets/external_libraries-507bf28a74260fdc83d8547e5c699aa9.css" />
     <link rel="stylesheet" media="all" href="https://hrcdn.net/hackerrank/assets/auth-43c15f79360339f125f5aa081a6fc6d7.css" />
@@ -24,67 +24,20 @@
 
 <div class="responsive-form block-center">
   <div class="login-group homepage_admin light-wrap">
-      <ul class="login_tab unstyled vertical clearfix">
-          <li class="signup-toggle toggle active"><a href="/account/register" data-toggle="tab">Register</a></li>
-          <li class="login-toggle toggle"><a href="/account/login" data-toggle="tab">Log In</a></li>
-      </ul>
+        <center>
+      <h4>User credentials entered are wrong</h4>
 
-
-      <div class="login " style="display: block;">
-          <form class="legacy-form Bizible-Exclude" method="POST">
-              <div class="alert alert-danger" role="alert">
-                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-                      <span class="sr-only">Error:</span>
-                      Passwords entered mismatch
-                </div>
-               {% csrf_token %}
-              <div class="homepage_signupgroup--legacy">
-                  <div class="text-center alert error" style="display:none;"></div>
-                  <div class="formgroup">
-                      <i class="icon-user"></i>
-                      <input type="text" name="username" width="20dp" required placeholder="Enter UserName" class="form-control" id="id_username" />
-
-                  </div>
-                  <div class="formgroup">
-                      <i class="icon-user"></i>
-                      <input type="text" name="first_name" placeholder="First Name" class="form-control" id="id_first_name" />
-
-                  </div>
-                  <div class="formgroup">
-                      <i class="icon-user"></i>
-                      <input type="text" name="last_name" placeholder="Last Name" class="form-control" id="id_last_name" />
-
-                  </div>
-                  <div class="formgroup">
-                      <i class="icon-mail"></i>
-                       <input type="text" name="email" required placeholder="Email required" class="form-control" id="id_email" />
-
-                  </div>
-                  <div class="formgroup">
-                      <i class="icon-lock"></i>
-                      <input type="password" name="password1" required placeholder="Password required" class="form-control" id="id_password1" />
-                  </div>
-                  <div class="formgroup">
-                      <i class="icon-lock"></i>
-                      <input type="password" name="password2" required placeholder="Renter Password " class="form-control" id="id_password2" />
-                  </div>
-                  <p>*Password must contain numbers and uppercase characters </p>
-                  <p>*Password must not be similar to the name</p>
+       <a href="{% url 'accounts:login' %}" class="btn btn-primary">Login  </a>
+      <a href="{% url 'accounts:register' %}" class="btn btn-primary">Register</a>
+</center>
 
 
 
-                  <p class="text-center"><button class="btn btn-primary login-button auth" type="submit">Next</button></p>
-
-              </div>
-
-
-          </form>
       </div>
   </div>
   </div>
 
 {% endblock %}
-
 
 
 
