@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+<h1 >home</h1>
+
+    {% block head %}
+    <title>home</title>
+    {% endblock %}
+
+    {% block body %}
+<br>
+<br>
+<br>
+<br>
+<br>
+
+
+<form method="post">
+
+
+ <center>
+    {% csrf_token %}
+    {{contact_form.as_p}}
+
+
+ <p class="text-center"><button class="btn btn-primary" type="submit">Summary</button></p>
+
+</form>
+
+    {% endblock %}

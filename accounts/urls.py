@@ -6,10 +6,17 @@ from django.contrib.auth.views import (
 )
 
 urlpatterns = [
+                url(r'^$', views.home,name='home'),
 
-                url(r'^login/$', login, { 'template_name':'accounts/login.html' },name='login' ),
+                url(r'^login/$', views.login, { 'template_name':'accounts/login.html' },name='login' ),
 
-                url(r'^logout/$', logout, { 'template_name':'accounts/logout.html' },name='logout' ),
+                url(r'^logout/$', views.logout_view ,name='logout' ),
+
+                url(r'^feedback/$', views.feedback ,name='feedback' ),
+
+                url(r'^feedbacktillnow/$', views.feedbacktillnow, name='feedbacktillnow'),
+
+                #url(r'^getsummary/$', views.getsummary, name='getsummary'),
 
                 url(r'^register/$', views.register , name='register'),
 

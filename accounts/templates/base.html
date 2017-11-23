@@ -1,17 +1,25 @@
 <html>
     <head>
-
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-        <!---->
+    <style>
+.navbar-custom {
+    background-color: #000000;
+        color: #FFFFFF;
+}
+.navbar-custom .navbar-brand,
+.navbar-custom .navbar-link {
+    color: #ffffff;
+}
 
+</style>
         {% block head %}
         <title>Intranet</title>
 
         {% endblock %}
     </head>
-    <body>
+    <body >
       <!-- Static navbar -->
-      <nav class="navbar navbar-default">
+        <div id="custom-bootstrap-menu" class="navbar navbar-custom navbar-fixed-top" role="navigation">
         <div class="container-fluid">
           <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -21,33 +29,43 @@
               <span class="icon-bar"></span>
             </button>
             <a class="navbar-brand" >Intranet</a>
+
           </div>
+
           <div id="nav navbar-nav" class="navbar-collapse collapse">
               {% if user.is_authenticated %}
               <ul class="nav navbar-nav">
-                <li><a href="{% url 'feed:index'%}">Home</a></li>
-                <li><a href="{% url 'accounts:view_profile' %}">Profile</a></li>
-
-
+                  <li><a href="{% url 'feed:index'%}"><b>Home</b></a></li>
+                  <li><a href="{% url 'accounts:view_profile' %}"><b>Profile</b></a></li>
               </ul>
-              <ul class="nav navbar-nav navbar-right">
-              <li><a href="{% url 'accounts:logout' %}">Logout</a></li>
+              <ul class="nav navbar-nav ">
+                  <li><a href="{% url 'accounts:feedbacktillnow' %}"><b>Get Summary</b></a></li>
             </ul>
+               <ul class="nav navbar-nav navbar-right">
+                    <li><iframe src="http://free.timeanddate.com/clock/i5vql3zj/n1038/fn7/fs17/fc09f/tct/pct/ftb/pt14/th2" frameborder="0" width="118" height="37" allowTransparency="true"></iframe>
+</li>
+            </ul>
+
+              <ul class="nav navbar-nav navbar-right">
+                  <li><a href="{% url 'accounts:feedback' %}"><b>Clock-Out</b></a></li>
+            </ul>
+
 
               {% else %}
-            <ul class="nav navbar-nav">
-                <li><a href="{% url 'accounts:login' %}">Login</a></li>
 
-            </ul>
 
             <ul class="nav navbar-nav navbar-right">
-              <li><a href="{% url 'accounts:register' %}">Register</a></li>
+                <li><a href="{% url 'accounts:register' %}"><b>Register</b></a></li>
+
+            </ul>
+              <ul class="nav navbar-nav navbar-right">
+                  <li><a href="{% url 'accounts:login' %}"><b>Login</b></a></li>
 
             </ul>
              {% endif %}
           </div><!--/.nav-collapse -->
         </div><!--/.container-fluid -->
-      </nav>
+        </div>
 
         {% block body %}
 

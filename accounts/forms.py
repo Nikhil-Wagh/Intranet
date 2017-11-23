@@ -51,7 +51,7 @@ class UserProfileForm(ModelForm):
         model = UserProfile
         fields = ['description','city',
                   'website','phone','experience',
-                  'skills','emp_rating']
+                  'skills','image']
 
         def save(self, commit=True):
             ob = super(UserProfileForm, self).save(commit=False)
@@ -61,11 +61,19 @@ class UserProfileForm(ModelForm):
             ob.phone = self.cleaned_data['phone']
             ob.experience = self.cleaned_data['experience']
             ob.skills = self.cleaned_data['skills']
-            ob.emp_rating = self.cleaned_data['emp_rating']
+            ob.image=self.cleaned_data['image']
 
             if commit:
                 user.save()
 
             return ob
 
+class FeedbackForm(forms.Form):
+    feedback = forms.CharField(widget=forms.Textarea)
+
+class ContactForm(forms.Form):
+    selectuser = forms.CharField()
+
+class ContactFilterForm(forms.Form):
+    User = forms.ModelChoiceField(queryset=User.objects.all())
 
